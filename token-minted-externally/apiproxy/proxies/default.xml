@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ProxyEndpoint name="default">
+    <Description>Oauth2 API</Description>
+    <FaultRules>
+        <FaultRule name="authenticationError">
+            <Step>
+                <Name>Raise-Authentication-Exception</Name>
+            </Step>
+            <Condition>(fault.name == "ExecutionFailed")</Condition>
+        </FaultRule>
+    </FaultRules>
+    <Flows>
+        <Flow name="AuthorizationCodeRequest">
+            <Request>
+                <Step>
+                    <FaultRules/>
+                    <Name>SetAuthCodeParameters</Name>
+                </Step>
+                <Step>
+                    <FaultRules/>
+                    <Name>GenerateAuthorizationCode</Name>
+                </Step>
+            </Request>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath "/userAuthorize")</Condition>
+        </Flow>
+        <Flow name="AccessTokenRequest">
+            <Request>
+                <Step>
+                    <Name>Authenticate-User-With-Okta</Name>
+                    <Condition>(request.formparam.grant_type == "password")</Condition>
+                </Step>
+                <Step>
+                    <Name>Extract-Okta-User-Info</Name>
+                    <Condition>(request.formparam.grant_type == "password")</Condition>
+                </Step>
+                <Step>
+                    <Name>Raise-Authentication-Exception</Name>
+                    <Condition>((request.formparam.grant_type == "password") and ((okta.token.status == null) or (okta.token.status != "SUCCESS")))</Condition>
+                </Step>
+                <Step>
+                    <Name>SetOktaTokenStatus</Name>
+                </Step>
+                <Step>
+                    <FaultRules/>
+                    <Name>AccessTokenRequest</Name>
+                </Step>
+            </Request>
+            <Response>
+                <Step>
+                    <Condition>(request.formparam.grant_type == "authorization_code")</Condition>
+                    <FaultRules/>
+                    <Name>AccessTokenResponse</Name>
+                </Step>
+                <Step>
+                    <Condition>(request.formparam.grant_type == "client_credentials")</Condition>
+                    <FaultRules/>
+                    <Name>AccessTokenResponseCC</Name>
+                </Step>
+                <Step>
+                    <Name>AccessTokenResponse</Name>
+                    <Condition>(request.formparam.grant_type == "password")</Condition>
+                </Step>
+                <Step>
+                    <Condition>(request.header.Accept != "application/json")</Condition>
+                    <FaultRules/>
+                    <Name>JsonToXml</Name>
+                </Step>
+            </Response>
+            <Condition>(proxy.pathsuffix MatchesPath "/token")</Condition>
+        </Flow>
+        <Flow name="RefreshTokenRequest">
+            <Request>
+                <Step>
+                    <FaultRules/>
+                    <Name>AccessTokenRefresh</Name>
+                </Step>
+                <Step>
+                    <FaultRules/>
+                    <Name>AccessTokenResponseRT</Name>
+                </Step>
+                <Step>
+                    <Condition>(request.header.Accept != "application/json")</Condition>
+                    <FaultRules/>
+                    <Name>JsonToXml</Name>
+                </Step>
+            </Request>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath "/token") and (request.formparam.grant_type == "refresh_token")</Condition>
+        </Flow>
+        <Flow name="ValidateToken">
+            <Description/>
+            <Request>
+                <Step>
+                    <FaultRules/>
+                    <Name>VerifyAccessToken</Name>
+                </Step>
+            </Request>
+            <Response>
+                <Step>
+                    <FaultRules/>
+                    <Name>SetValidTokenResponse</Name>
+                </Step>
+            </Response>
+            <Condition>(proxy.pathsuffix MatchesPath "/validate") and (request.verb =="GET")</Condition>
+        </Flow>
+        <Flow name="DefaultNotFound">
+            <Request/>
+            <Response>
+                <Step>
+                    <FaultRules/>
+                    <Name>Send404NotFoundResponse</Name>
+                </Step>
+            </Response>
+        </Flow>
+    </Flows>
+    <PostFlow name="PostFlow">
+        <Request/>
+        <Response/>
+    </PostFlow>
+    <PreFlow name="PreFlow">
+        <Request/>
+        <Response/>
+    </PreFlow>
+    <HTTPProxyConnection>
+        <BasePath>/oauth-ext2</BasePath>
+        <Properties/>
+        <VirtualHost>secure</VirtualHost>
+    </HTTPProxyConnection>
+    <RouteRule name="NoRoute"/>
+</ProxyEndpoint>

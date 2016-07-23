@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage async="false" continueOnError="false" enabled="true" name="AccessTokenResponse">
+    <DisplayName>AccessTokenResponse</DisplayName>
+    <FaultRules/>
+    <Properties/>
+    <Set>
+        <Payload contentType="application/json" variablePrefix="%" variableSuffix="#">
+            {
+                "access_token":"%oauthv2accesstoken.AccessTokenRequest.access_token#",
+                "refresh_token":"%oauthv2accesstoken.AccessTokenRequest.refresh_token#",
+                "expires_in":"%oauthv2accesstoken.AccessTokenRequest.expires_in#",
+                "scope":"%oauthv2accesstoken.AccessTokenRequest.scope#",
+                "user.firstName":"%okta.token.user.firstName#",
+                "user.lastName":"%okta.token.user.lastName#",
+                "user.locale":"%okta.token.user.locale#",
+                "user.timeZone":"%okta.token.user.timeZone#"
+            }
+        </Payload>
+    </Set>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <AssignTo type="response" transport="http" createNew="true"/>
+</AssignMessage>

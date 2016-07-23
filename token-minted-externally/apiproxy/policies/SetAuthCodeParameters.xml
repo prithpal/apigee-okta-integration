@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Javascript timeLimit="0" async="false" continueOnError="false" enabled="true" name="SetAuthCodeParameters">
+    <DisplayName>SetAuthCodeParameters</DisplayName>
+    <FaultRules/>
+    <Properties/>
+    <ResourceURL>jsc://SetAuthCodeParameters.js</ResourceURL>
+</Javascript>

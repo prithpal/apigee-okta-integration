@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<OAuthV2 async="false" continueOnError="false" enabled="true" name="AccessTokenRequest">
+    <DisplayName>AccessTokenRequest</DisplayName>
+    <FaultRules/>
+    <Properties/>
+    <Attributes/>
+    <ExpiresIn>36000000</ExpiresIn>
+    <ExternalAccessToken>okta.token.sessionToken</ExternalAccessToken>
+    <ExternalAuthorization>true</ExternalAuthorization>
+    <ReuseRefreshToken>false</ReuseRefreshToken>
+    <StoreToken>true</StoreToken>
+    <Operation>GenerateAccessToken</Operation>
+    <GenerateResponse enabled="false">
+        <Format>FORM_PARAM</Format>
+    </GenerateResponse>
+    <ReuseRefreshToken>false</ReuseRefreshToken>
+    <SupportedGrantTypes>
+        <GrantType>password</GrantType>
+    </SupportedGrantTypes>
+    <Tokens/>
+    <!-- below is used for password grant typr -->
+    <UserName>request.formparam.user</UserName>
+    <PassWord>request.formparam.password</PassWord>
+    <Attributes>
+        <Attribute name="okta-token.expiresAt" ref="okta.token.expiresAt" display="false"/>
+        <Attribute name="okta-token.status" ref="okta.token.status" display="false"/>
+        <Attribute name="okta-token.relayState" ref="okta.token.relayState" display="false"/>
+        <Attribute name="okta-token.sessionToken" ref="okta.token.sessionToken" display="false"/>
+        <Attribute name="okta-token.user.id" ref="okta.token.user.id" display="false"/>
+        <Attribute name="okta-token.user.passwordChanged" ref="okta.token.user.passwordChanged" display="false"/>
+        <Attribute name="okta-token.user.firstName" ref="okta.token.user.firstName" display="false"/>
+        <Attribute name="okta-token.user.lastName" ref="okta.token.user.lastName" display="false"/>
+        <Attribute name="okta-token.user.timeZone" ref="okta.token.user.timeZone" display="false"/>
+    </Attributes>
+</OAuthV2>

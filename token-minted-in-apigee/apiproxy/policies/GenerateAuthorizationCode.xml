@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<OAuthV2 async="false" continueOnError="false" enabled="true" name="GenerateAuthorizationCode">
+    <DisplayName>GenerateAuthorizationCode</DisplayName>
+    <FaultRules/>
+    <Properties/>
+    <ClientId>request.queryparam.client_id</ClientId>
+    <Attributes>
+        <Attribute display="true" name="username" ref="request.queryparam.username">NA</Attribute>
+    </Attributes>
+    <ExternalAuthorization>false</ExternalAuthorization>
+    <Operation>GenerateAuthorizationCode</Operation>
+    <RedirectUri>request.queryparam.redirect_uri</RedirectUri>
+    <GenerateResponse enabled="true">
+        <Format>FORM_PARAM</Format>
+    </GenerateResponse>
+    <ResponseType>request.queryparam.response_type</ResponseType>
+    <ReuseRefreshToken>false</ReuseRefreshToken>
+    <Scope>request.queryparam.scope</Scope>
+    <SupportedGrantTypes/>
+    <Tokens/>
+</OAuthV2>

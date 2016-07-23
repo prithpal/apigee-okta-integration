@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<APIProxy revision="2" name="oauth-ext2">
+    <ConfigurationVersion majorVersion="4" minorVersion="0"/>
+    <CreatedAt>1469292854949</CreatedAt>
+    <CreatedBy>defaultUser</CreatedBy>
+    <DisplayName>oauth2</DisplayName>
+    <LastModifiedAt>1469292854949</LastModifiedAt>
+    <LastModifiedBy>defaultUser</LastModifiedBy>
+    <Policies>
+        <Policy>AccessTokenRefresh</Policy>
+        <Policy>AccessTokenRequest</Policy>
+        <Policy>AccessTokenResponse</Policy>
+        <Policy>AccessTokenResponseCC</Policy>
+        <Policy>AccessTokenResponseRT</Policy>
+        <Policy>Authenticate-User-With-Okta</Policy>
+        <Policy>Extract-Okta-User-Info</Policy>
+        <Policy>GenerateAuthorizationCode</Policy>
+        <Policy>JsonToXml</Policy>
+        <Policy>Raise-Authentication-Exception</Policy>
+        <Policy>Send404NotFoundResponse</Policy>
+        <Policy>SetAuthCodeParameters</Policy>
+        <Policy>SetOktaTokenStatus</Policy>
+        <Policy>SetValidTokenResponse</Policy>
+        <Policy>VerifyAccessToken</Policy>
+    </Policies>
+    <ProxyEndpoints>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+    <Resources>
+        <Resource>jsc://SetAuthCodeParameters.js</Resource>
+    </Resources>
+    <TargetServers/>
+    <TargetEndpoints/>
+</APIProxy>

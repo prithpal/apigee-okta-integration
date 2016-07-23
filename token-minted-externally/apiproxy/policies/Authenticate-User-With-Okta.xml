@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ServiceCallout async="false" continueOnError="false" enabled="true" name="Authenticate-User-With-Okta">
+    <DisplayName>Authenticate User With Okta</DisplayName>
+    <Properties/>
+    <Request clearPayload="true" variable="calloutRequest">
+        <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
+        <Set>
+            <Verb>POST</Verb>
+            <Payload contentType="application/json" variablePrefix="!" variableSuffix="#">
+                {
+                    "username": "!request.formparam.user#",
+                    "password": "!request.formparam.password#",
+                    "relayState": "/myapp/some/deep/link/i/want/to/return/to",
+                    "options": {
+                        "multiOptionalFactorEnroll": false,
+                        "warnBeforePasswordExpired": false
+                    }
+                }
+            </Payload>
+        </Set>
+    </Request>
+    <Response>calloutResponse</Response>
+    <HTTPTargetConnection>
+        <Properties/>
+        <URL>https://dev-309307.oktapreview.com/api/v1/authn</URL>
+    </HTTPTargetConnection>
+</ServiceCallout>

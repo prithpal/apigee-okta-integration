@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ExtractVariables async="false" continueOnError="false" enabled="true" name="Extract-Okta-User-Info">
+    <DisplayName>Extract Okta User Info</DisplayName>
+    <Properties/>
+    <JSONPayload>
+        <Variable name="expiresAt">
+            <JSONPath>$.expiresAt</JSONPath>
+        </Variable>
+        <Variable name="status">
+            <JSONPath>$.status</JSONPath>
+        </Variable>
+        <Variable name="relayState">
+            <JSONPath>$.relayState</JSONPath>
+        </Variable>
+        <Variable name="sessionToken">
+            <JSONPath>$.sessionToken</JSONPath>
+        </Variable>
+        <Variable name="user.id">
+            <JSONPath>$._embedded.user.id</JSONPath>
+        </Variable>
+        <Variable name="user.passwordChanged">
+            <JSONPath>$._embedded.user.passwordChanged</JSONPath>
+        </Variable>
+        <Variable name="user.login">
+            <JSONPath>$._embedded.user.profile.login</JSONPath>
+        </Variable>
+        <Variable name="user.firstName">
+            <JSONPath>$._embedded.user.profile.firstName</JSONPath>
+        </Variable>
+        <Variable name="user.lastName">
+            <JSONPath>$._embedded.user.profile.lastName</JSONPath>
+        </Variable>
+        <Variable name="user.locale">
+            <JSONPath>$._embedded.user.profile.locale</JSONPath>
+        </Variable>
+        <Variable name="user.timeZone">
+            <JSONPath>$._embedded.user.profile.timeZone</JSONPath>
+        </Variable>
+    </JSONPayload>
+    <VariablePrefix>okta.token</VariablePrefix>
+    <Source clearPayload="false">calloutResponse</Source>
+</ExtractVariables>
